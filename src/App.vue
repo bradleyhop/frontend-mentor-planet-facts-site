@@ -1,11 +1,40 @@
-<script setup>
-import { RouterLink, RouterView } from "vue-router";
+<script>
+// import { RouterLink, RouterView } from "vue-router";
+import { RouterLink } from "vue-router";
+
+export default {
+  data() {
+    return {
+      viewPlanet: {}, // on init, load local json
+    };
+  },
+
+  beforeCreate() {
+    // load in default MD text as supplied in our local json file
+    fetch("./src/assets/data/data.json")
+      .then((response) => response.json())
+      .then((data) => {
+        this.viewPlanet = data;
+        console.log(this.viewPlanet);
+      })
+      .catch(() => {
+        console.log = "Did not load!";
+      });
+  },
+};
 </script>
 
 <template>
   <div>
     <nav>
+      <RouterLink to="/mercury">Mercury</RouterLink>
+      <RouterLink to="/venus">Venus</RouterLink>
       <RouterLink to="/earth">Earth</RouterLink>
+      <RouterLink to="/mars">Mars</RouterLink>
+      <RouterLink to="/jupiter">Jupiter</RouterLink>
+      <RouterLink to="/saturn">Saturn</RouterLink>
+      <RouterLink to="/uranus">Uranus</RouterLink>
+      <RouterLink to="/neptune">Neptune</RouterLink>
     </nav>
   </div>
 
