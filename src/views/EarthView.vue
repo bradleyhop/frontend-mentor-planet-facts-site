@@ -11,12 +11,12 @@ export default {
 </script>
 
 <template>
-  <h1 class="page-title">Earth</h1>
+  <h1 class="page-title header-1">Earth</h1>
 
   <!-- Overview Content Start -->
 
   <div class="overview-container">
-    <p class="overview">
+    <p class="overview para-p">
       Third planet from the Sun and the only known planet to harbor life. About
       29.2% of Earth's surface is land with remaining 70.8% is covered with
       water. Earth's distance from the Sun, physical properties and geological
@@ -34,7 +34,7 @@ export default {
   <!-- Internal Structure Content Start -->
 
   <div class="internal-container">
-    <p class="internal-content">
+    <p class="internal-content para-p">
       Earth's interior, like that of the other terrestrial planets, is divided
       into layers by their chemical or physical (rheological) properties. The
       outer layer is a chemically distinct silicate solid crust, which is
@@ -52,7 +52,7 @@ export default {
   <!-- Surface Geology Content Start -->
 
   <div class="surface-container">
-    <p class="surface-content">
+    <p class="surface-content para-p">
       The total surface area of Earth is about 510 million km2. The continental
       crust consists of lower density material such as the igneous rocks granite
       and andesite. Less common is basalt, a denser volcanic rock that is the
@@ -68,9 +68,25 @@ export default {
   <!-- Surface Geology Content End -->
 
   <div class="fact-menu">
-    <button>01 Overview</button>
-    <button>02 Internal Structure</button>
-    <button>03 Surface Geology</button>
+    <!-- dynamically set class here later -->
+    <div class="button-container">
+      <button class="button-active">
+        <span class="button-number">01</span
+        ><span class="button-text"> Overview</span>
+      </button>
+    </div>
+    <div class="button-container">
+      <button class="button-inactive">
+        <span class="button-number">02</span>
+        <span class="button-text">Internal Structure</span>
+      </button>
+    </div>
+    <div class="button-container">
+      <button class="button-inactive">
+        <span class="button-number">03</span
+        ><span class="button-text">Surface Geology</span>
+      </button>
+    </div>
   </div>
 
   <div class="number-facts-container">
@@ -95,3 +111,9 @@ export default {
     </div>
   </div>
 </template>
+
+<style lang="scss">
+.page-title {
+  color: $earth-purple;
+}
+</style>

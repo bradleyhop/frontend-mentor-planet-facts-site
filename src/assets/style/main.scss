@@ -1,0 +1,87 @@
+/*
+ * Sets project defaults, globals, media query breakpoints, and app layout
+ */
+
+@import "typography.scss";
+@import "colors.scss";
+
+
+// reset browser defaults
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: $blackish;
+  color: $white;
+}
+
+
+/*
+ * Device size breakpoints
+ * NOTE: no mobile breakpoint because that is the default
+ */
+@mixin tablet-breakpoint {
+  @media only screen and (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin desktop-breakpoint {
+  @media only screen and (min-width: 1280px) {
+    @content;
+  }
+}
+
+@mixin large-desktop-breakpoint {
+  @media only screen and (min-width: 1920px) {
+    @content;
+  }
+}
+
+// set max-widths for content
+.device-widths {
+  @include tablet-breakpoint {
+    width: 80vw;
+  }
+
+  @include desktop-breakpoint {
+    width: 60vw;
+  }
+
+  @include large-desktop-breakpoint {
+    width: 40vw;
+  }
+
+  width: 90vw;
+  margin: auto;
+}
+
+/*
+ * buttons
+ * NOTE: the background on color active is not set here
+ */
+// placeholder
+%button-border {
+  border: 1px solid $white;
+  opacity: 0.2;
+}
+
+.button-inactive {
+  @extend %button-border;
+  background-color: $blackish;
+  background: none;
+  color: $white;
+}
+
+.button-number {
+  @extend .header-4;
+}
+
+.button-text {
+  @extend .header-4;
+}

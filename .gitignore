@@ -18,6 +18,7 @@ coverage
 /cypress/screenshots/
 
 # Editor directories and files
+.vscode
 .vscode/*
 !.vscode/extensions.json
 .idea
@@ -28,4 +29,10 @@ coverage
 *.sw?
 
 # Frontend Mentor supplied files
-planet-fact-site/*
+planet-fact-site/
+
+planets-fact-site/planets-fact-site-figma/__MACOSX/planets-fact-site-figma/._README.md
+planets-fact-site/planets-fact-site-figma/__MACOSX/planets-fact-site-figma/._planets-fact-site.fig
+planets-fact-site/planets-fact-site-figma/planets-fact-site-figma/README.md
+planets-fact-site/planets-fact-site-figma/planets-fact-site-figma/planets-fact-site.fig
+planets-fact-site/planets-fact-site-figma.zip
