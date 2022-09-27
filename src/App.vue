@@ -1,11 +1,15 @@
 <script>
-// import { RouterLink, RouterView } from "vue-router";
-import { RouterLink } from "vue-router";
+import PlanetDisplay from "@/components/PlanetDisplay.vue";
 
 export default {
+  components: {
+    PlanetDisplay,
+  },
+
   data() {
     return {
-      viewPlanet: {}, // on init, load local json
+      dataPlanet: {}, // on init, load local json
+      viewPlanet: {}, // load a default planet view, earth
     };
   },
 
@@ -14,12 +18,23 @@ export default {
     fetch("./src/assets/data/data.json")
       .then((response) => response.json())
       .then((data) => {
-        this.viewPlanet = data;
-        console.log(this.viewPlanet);
+        this.dataPlanet = data;
       })
       .catch(() => {
         console.log = "Did not load!";
+      })
+      .finally(() => {
+        // set Earth as deafult view
+        this.viewPlanet = this.dataPlanet[2];
+        console.log(this.viewPlanet);
       });
+  },
+
+  methods: {
+    setNewPlanet(orbitNum) {
+      this.viewPlanet = this.dataPlanet[orbitNum];
+      console.log(this.viewPlanet.name);
+    },
   },
 };
 </script>
@@ -27,15 +42,19 @@ export default {
 <template>
   <div>
     <nav>
-      <RouterLink class="router-text" to="/mercury">Mercury</RouterLink>
-      <RouterLink class="router-text" to="/venus">Venus</RouterLink>
-      <RouterLink class="router-text" to="/earth">Earth</RouterLink>
-      <RouterLink class="router-text" to="/mars">Mars</RouterLink>
-      <RouterLink class="router-text" to="/jupiter">Jupiter</RouterLink>
-      <RouterLink class="router-text" to="/saturn">Saturn</RouterLink>
-      <RouterLink class="router-text" to="/uranus">Uranus</RouterLink>
-      <RouterLink class="router-text" to="/neptune">Neptune</RouterLink>
+      <ul class="menu-list">
+        <li class="menu-item" @click="setNewPlanet(0)">Mercury</li>
+        <li class="menu-item" @click="setNewPlanet(1)">Venus</li>
+        <li class="menu-item" @click="setNewPlanet(2)">Earth</li>
+        <li class="menu-item" @click="setNewPlanet(3)">Mars</li>
+        <li class="menu-item" @click="setNewPlanet(4)">Jupiter</li>
+        <li class="menu-item" @click="setNewPlanet(5)">Saturn</li>
+        <li class="menu-item" @click="setNewPlanet(6)">Uranus</li>
+        <li class="menu-item" @click="setNewPlanet(7)">Neptune</li>
+      </ul>
     </nav>
+
+    <PlanetDisplay :planet="viewPlanet" />
   </div>
 
   <RouterView />
@@ -47,6 +66,16 @@ nav {
   font-size: 12px;
   text-align: center;
   margin-top: 2rem;
+}
+
+.menu-list {
+  list-style: none;
+  display: inline-flex;
+
+  .menu-item {
+    cursor: pointer;
+    margin: 1rem;
+  }
 }
 
 .router-text {
