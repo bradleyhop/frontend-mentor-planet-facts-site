@@ -10,6 +10,7 @@ export default {
     return {
       dataPlanet: {}, // on init, load local json
       viewPlanet: {}, // load a default planet view, earth
+      loaded: false, // show PlanetDisplay component only after json loads
     };
   },
 
@@ -26,38 +27,33 @@ export default {
       .finally(() => {
         // set Earth as deafult view
         this.viewPlanet = this.dataPlanet[2];
-        console.log(this.viewPlanet);
+        this.loaded = true;
       });
   },
 
   methods: {
     setNewPlanet(orbitNum) {
       this.viewPlanet = this.dataPlanet[orbitNum];
-      console.log(this.viewPlanet.name);
     },
   },
 };
 </script>
 
 <template>
-  <div>
-    <nav>
-      <ul class="menu-list">
-        <li class="menu-item" @click="setNewPlanet(0)">Mercury</li>
-        <li class="menu-item" @click="setNewPlanet(1)">Venus</li>
-        <li class="menu-item" @click="setNewPlanet(2)">Earth</li>
-        <li class="menu-item" @click="setNewPlanet(3)">Mars</li>
-        <li class="menu-item" @click="setNewPlanet(4)">Jupiter</li>
-        <li class="menu-item" @click="setNewPlanet(5)">Saturn</li>
-        <li class="menu-item" @click="setNewPlanet(6)">Uranus</li>
-        <li class="menu-item" @click="setNewPlanet(7)">Neptune</li>
-      </ul>
-    </nav>
+  <nav>
+    <ul class="menu-list">
+      <li class="menu-item" @click="setNewPlanet(0)">Mercury</li>
+      <li class="menu-item" @click="setNewPlanet(1)">Venus</li>
+      <li class="menu-item" @click="setNewPlanet(2)">Earth</li>
+      <li class="menu-item" @click="setNewPlanet(3)">Mars</li>
+      <li class="menu-item" @click="setNewPlanet(4)">Jupiter</li>
+      <li class="menu-item" @click="setNewPlanet(5)">Saturn</li>
+      <li class="menu-item" @click="setNewPlanet(6)">Uranus</li>
+      <li class="menu-item" @click="setNewPlanet(7)">Neptune</li>
+    </ul>
+  </nav>
 
-    <PlanetDisplay :planet="viewPlanet" />
-  </div>
-
-  <RouterView />
+  <PlanetDisplay v-if="loaded" :planet="viewPlanet" />
 </template>
 
 <style lang="scss">
@@ -76,9 +72,5 @@ nav {
     cursor: pointer;
     margin: 1rem;
   }
-}
-
-.router-text {
-  padding: 1rem;
 }
 </style>
