@@ -5,96 +5,80 @@ export default {
       overviewCopy: true, // load overview copy on load
       internalCopy: false,
       surfaceCopy: false,
+      planetInfo: ["overview", "structure", "geology"],
+      imgLayer: ["planet", "internal", "geology"], // diff names for img sources
+      num: 0, // overview is the default planet layer view
     };
   },
 
   props: {
-    planet: Object,
+    planet: {
+      type: Object,
+      required: true,
+    },
+  },
+
+  methods: {
+    setPlanetView: function (which) {
+      this.num = which;
+    },
+  },
+
+  computed: {
+    imageUrl() {
+      // this is going to need more logic to show planet layer
+      return new URL(
+        `${this.planet.images[this.imgLayer[this.num]]}`,
+        import.meta.url
+      ).href;
+    },
+
+    paragraphCopy() {
+      return this.planet[this.planetInfo[this.num]].content;
+    },
+
+    sourceLink() {
+      return this.planet[this.planetInfo[this.num]].source;
+    },
   },
 };
 </script>
 
 <template>
+  <div class="img-container">
+    <img class="planet-img" :src="imageUrl" />
+  </div>
+
   <h1 class="page-title header-1">{{ planet.name }}</h1>
 
-  <!-- Overview Content Start -->
-
-  <div class="overview-container">
-    <p class="overview para-p">
-      {{ planet.overview.content }}
+  <!-- only one child will be displayed at a time -->
+  <div class="layer-info-container">
+    <p class="para-p">
+      {{ paragraphCopy }}
     </p>
 
     <div class="source">
       Source :
-      <a
-        :href="planet.overview.source"
-        target="_blank"
-        rel="noopener noreferrer"
+      <a :href="sourceLink" target="_blank" rel="noopener noreferrer"
         >Wikipedia</a
       >
     </div>
   </div>
-
-  <!-- Overview Content End -->
-
-  <!-- Internal Structure Content Start -->
-
-  <div class="internal-container">
-    <p class="internal-content para-p">
-      {{ planet.structure.content }}
-    </p>
-
-    <div class="internal-source">
-      Source :
-      <a
-        :href="planet.structure.source"
-        target="_blank"
-        rel="noopener noreferrer"
-        >Wikipedia</a
-      >
-    </div>
-  </div>
-
-  <!-- Internal Structure Content End -->
-
-  <!-- Surface Geology Content Start -->
-
-  <div class="surface-container">
-    <p class="surface-content para-p">
-      {{ planet.geology.content }}
-    </p>
-
-    <div class="surface-source">
-      Source :
-      <a :href="planet.geology.source" target="_blank" rel="noopener noreferrer"
-        >Wikipedia</a
-      >
-      <!-- URL: https://en.wikipedia.org/wiki/Earth#Surface -->
-    </div>
-  </div>
-
-  <!-- Surface Geology Content End -->
 
   <div class="fact-menu">
     <!-- dynamically set class here later -->
-    <div class="button-container">
-      <button class="button-active">
-        <span class="button-number">01</span
-        ><span class="button-text"> Overview</span>
-      </button>
-    </div>
-    <div class="button-container">
-      <button class="button-inactive">
-        <span class="button-number">02</span>
-        <span class="button-text">Internal Structure</span>
-      </button>
-    </div>
-    <div class="button-container">
-      <button class="button-inactive">
-        <span class="button-number">03</span
-        ><span class="button-text">Surface Geology</span>
-      </button>
-    </div>
+    <button class="button-active" @click="setPlanetView(0)">
+      <span class="button-number">01</span
+      ><span class="button-text"> Overview</span>
+    </button>
+    <button class="button-inactive" @click="setPlanetView(1)">
+      <span class="button-number">02</span>
+      <span class="button-text">Internal Structure</span>
+    </button>
+    <button class="button-inactive" @click="setPlanetView(2)">
+      <span class="button-number">03</span
+      ><span class="button-text">Surface Geology</span>
+    </button>
   </div>
 
   <div class="number-facts-container">
@@ -123,5 +107,25 @@ export default {
 <style lang="scss">
 .page-title {
   color: $earth-purple;
+}
+
+.planet-img {
+  height: 15rem;
+  width: 15rem;
+}
+
+.layer-info-container {
+  min-height: 10rem;
+}
+
+.fact-menu {
+  display: flex;
+  flex-direction: column;
+  max-width: 50%;
+  margin: 2rem 0;
+}
+
+.number-facts-container > div {
+  margin: 1rem 0;
 }
 </style>
