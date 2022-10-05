@@ -9,7 +9,7 @@ export default {
   data() {
     return {
       dataPlanet: {}, // on init, load local json
-      viewPlanet: {}, // load a default planet view, earth
+      viewPlanet: {}, // load a default planet view: Earth
       loaded: false, // show PlanetDisplay component only after json loads
     };
   },
@@ -21,12 +21,16 @@ export default {
       .then((data) => {
         this.dataPlanet = data;
       })
-      .catch(() => {
-        console.log = "Did not load!";
-      })
-      .finally(() => {
+      .then(() => {
         // set Earth as deafult view
         this.viewPlanet = this.dataPlanet[2];
+      })
+      .catch(() => {
+        console.error("Data not found!");
+      })
+      .finally(() => {
+        // allow redering of planet content after load;
+        // avoids race conditions, async, etc
         this.loaded = true;
       });
   },
