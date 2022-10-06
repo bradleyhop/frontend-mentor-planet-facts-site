@@ -16,7 +16,10 @@
 
 body {
   background-color: $blackish;
+  background-image: url(../img/background-stars.svg);
   color: $white;
+  object-fit: cover;
+  background-repeat: repeat;
 }
 
 /*

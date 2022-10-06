@@ -41,6 +41,14 @@ export default {
       return this.planet[this.planetInfo[this.num]].source;
     },
   },
+
+  watch: {
+    // reset planet info to 'overview' when changing planets; no user story
+    //  given here, so this seems the most consistant i think
+    planet() {
+      this.num = 0;
+    },
+  },
 };
 </script>
 
