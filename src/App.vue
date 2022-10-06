@@ -44,37 +44,68 @@ export default {
 </script>
 
 <template>
-  <nav>
-    <ul class="menu-list">
-      <li class="menu-item" @click="setNewPlanet(0)">Mercury</li>
-      <li class="menu-item" @click="setNewPlanet(1)">Venus</li>
-      <li class="menu-item" @click="setNewPlanet(2)">Earth</li>
-      <li class="menu-item" @click="setNewPlanet(3)">Mars</li>
-      <li class="menu-item" @click="setNewPlanet(4)">Jupiter</li>
-      <li class="menu-item" @click="setNewPlanet(5)">Saturn</li>
-      <li class="menu-item" @click="setNewPlanet(6)">Uranus</li>
-      <li class="menu-item" @click="setNewPlanet(7)">Neptune</li>
-    </ul>
-  </nav>
+  <header>
+    <div class="logo-container"><span class="logo-text">THE PLANETS</span></div>
 
-  <PlanetDisplay v-if="loaded" :planet="viewPlanet" />
+    <nav>
+      <ul class="menu-list">
+        <li class="header-4 menu-item" @click="setNewPlanet(0)">MERCURY</li>
+        <li class="header-4 menu-item" @click="setNewPlanet(1)">VENUS</li>
+        <li class="header-4 menu-item" @click="setNewPlanet(2)">EARTH</li>
+        <li class="header-4 menu-item" @click="setNewPlanet(3)">MARS</li>
+        <li class="header-4 menu-item" @click="setNewPlanet(4)">JUPITER</li>
+        <li class="header-4 menu-item" @click="setNewPlanet(5)">SATURN</li>
+        <li class="header-4 menu-item" @click="setNewPlanet(6)">URANUS</li>
+        <li class="header-4 menu-item" @click="setNewPlanet(7)">NEPTUNE</li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="device-widths component-container">
+    <PlanetDisplay v-if="loaded" :planet="viewPlanet" />
+  </div>
 </template>
 
 <style lang="scss">
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
+header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  min-height: 6rem;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  margin-left: 2.28rem;
+}
+
+.logo-text {
+  font-family: $antonio-font;
+  font-size: 2rem;
+  letter-spacing: -1.05px;
+  line-height: 2.57rem;
 }
 
 .menu-list {
+  display: flex;
+  height: 100%;
   list-style: none;
-  display: inline-flex;
+  align-items: center;
 
   .menu-item {
     cursor: pointer;
-    margin: 1rem;
+    margin: 0 1.18rem;
+    opacity: 0.75;
+
+    &:last-child {
+      margin-right: 2.86rem;
+    }
+
+    &:hover {
+      opacity: 1;
+    }
   }
 }
 </style>
