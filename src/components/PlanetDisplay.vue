@@ -66,15 +66,25 @@ export default {
 
   <!-- only one child will be displayed at a time -->
   <div class="layer-info-container">
-    <p class="para-p">
+    <p class="para-p para-structure">
       {{ paragraphCopy }}
     </p>
 
     <div class="source">
       Source :
-      <a :href="sourceLink" target="_blank" rel="noopener noreferrer"
-        >Wikipedia</a
-      >
+      <a
+        :href="sourceLink"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="wiki-text-link"
+        >Wikipedia
+        <span
+          ><img
+            src="@/assets/img/icon-source.svg"
+            class="icon-img"
+            alt="link to Wikipedia source article"
+        /></span>
+      </a>
     </div>
   </div>
 
@@ -96,24 +106,24 @@ export default {
 
   <!-- fact boxes -->
   <div class="number-facts-container">
-    <div class="rotation-container">
-      <div class="title-fact-number">Rotation Time</div>
-      <div class="number-fact">{{ planet.rotation }}</div>
+    <div class="rotation-container grid-outline">
+      <div class="title-fact header-4">Rotation Time</div>
+      <div class="number-fact header-2">{{ planet.rotation }}</div>
     </div>
 
-    <div class="revolution-container">
-      <div class="ti-fact-number">Revolution Time</div>
-      <div class="number-fact">{{ planet.revolution }}</div>
+    <div class="revolution-container grid-outline">
+      <div class="title-fact header-4">Revolution Time</div>
+      <div class="number-fact header-2">{{ planet.revolution }}</div>
     </div>
 
-    <div class="radius-container">
-      <div class="title-fact-number">Radius</div>
-      <div class="number-fact">{{ planet.radius }}</div>
+    <div class="radius-container grid-outline">
+      <div class="title-fact header-4">Radius</div>
+      <div class="number-fact header-2">{{ planet.radius }}</div>
     </div>
 
-    <div class="temp-container">
-      <div class="title-fact-number">Average Temp.</div>
-      <div class="number-fact">{{ planet.temperature }}</div>
+    <div class="temp-container grid-outline">
+      <div class="title-fact header-4">Average Temp.</div>
+      <div class="number-fact header-2">{{ planet.temperature }}</div>
     </div>
   </div>
 </template>
@@ -124,8 +134,41 @@ export default {
   width: 15rem;
 }
 
+.page-title {
+  margin-bottom: 1.64rem;
+  text-transform: uppercase;
+}
+
 .layer-info-container {
   min-height: 10rem;
+}
+
+.para-structure {
+  margin-bottom: 1.71rem;
+}
+
+.source {
+  font-family: $spartan-font;
+  font-size: 1rem;
+  line-height: 1.79rem;
+  opacity: 0.5;
+
+  .wiki-text-link {
+    font-weight: 700;
+    color: $white;
+    text-decoration: underline;
+  }
+
+  .icon-img {
+    height: 0.86rem;
+    width: 0.86rem;
+    margin-left: 0.57rem;
+  }
+
+  // taking liberty here; not specified but seems reasonable
+  &:hover {
+    opacity: 1;
+  }
 }
 
 .fact-menu {
@@ -154,7 +197,23 @@ export default {
   }
 }
 
-.number-facts-container > div {
-  margin: 1rem 0;
+.number-facts-container {
+  display: grid;
+  column-gap: 2.14rem;
+  grid-template-columns: repeat(4, 1fr);
+
+  .grid-outline {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 1.43rem 0 1.93rem 1.64rem;
+  }
+
+  .title-fact {
+    text-transform: uppercase;
+    opacity: 0.5;
+  }
+
+  .number-fact {
+    text-transform: uppercase;
+  }
 }
 </style>
