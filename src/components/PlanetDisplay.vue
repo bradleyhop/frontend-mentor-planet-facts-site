@@ -16,6 +16,11 @@ export default {
       type: Object,
       required: true,
     },
+    // accent color
+    pColor: {
+      type: String,
+      required: true,
+    },
   },
 
   methods: {
@@ -73,22 +78,23 @@ export default {
     </div>
   </div>
 
+  <!-- buttons to select information layer -->
   <div class="fact-menu">
-    <!-- dynamically set class here later -->
-    <button class="button-active" @click="setPlanetView(0)">
+    <button class="button-itself" @click="setPlanetView(0)">
       <span class="button-number">01</span
       ><span class="button-text"> Overview</span>
     </button>
-    <button class="button-inactive" @click="setPlanetView(1)">
+    <button class="button-itself" @click="setPlanetView(1)">
       <span class="button-number">02</span>
       <span class="button-text">Internal Structure</span>
     </button>
-    <button class="button-inactive" @click="setPlanetView(2)">
+    <button class="button-itself" @click="setPlanetView(2)">
       <span class="button-number">03</span
       ><span class="button-text">Surface Geology</span>
     </button>
   </div>
 
+  <!-- fact boxes -->
   <div class="number-facts-container">
     <div class="rotation-container">
       <div class="title-fact-number">Rotation Time</div>
@@ -113,10 +119,6 @@ export default {
 </template>
 
 <style lang="scss">
-.page-title {
-  color: $earth-purple;
-}
-
 .planet-img {
   height: 15rem;
   width: 15rem;
@@ -129,8 +131,27 @@ export default {
 .fact-menu {
   display: flex;
   flex-direction: column;
-  max-width: 50%;
-  margin: 2rem 0;
+  max-width: 50%; // change me
+  margin: 2rem 0; // change me
+
+  .button-itself {
+    margin-bottom: 1.14rem;
+    padding: 12px 0 11px 0;
+    background-color: $blackish;
+  }
+
+  .button-number {
+    color: $white;
+    letter-spacing: 2.5px;
+    margin: 0 2rem;
+    opacity: 0.5;
+  }
+
+  .button-text {
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: $white;
+  }
 }
 
 .number-facts-container > div {
