@@ -12,7 +12,7 @@ export default {
       viewPlanet: {}, // prop; load a default planet view: Earth
       loaded: false, // show PlanetDisplay component only after json loads
       hover: false, // hover state for menu hover styling
-      hoverColor: "",
+      hoverColor: "", // cover for menu item hover border
       accentColor: [
         "rgb(65, 158, 187)",
         "rgb(237, 162, 73)",
@@ -171,6 +171,7 @@ header {
   font-size: 2rem;
   letter-spacing: -1.05px;
   line-height: 2.57rem;
+  text-transform: uppercase;
 }
 
 .menu-list {
@@ -192,6 +193,7 @@ header {
     padding: 2rem 0;
     // makes room for border-top hover effect
     border-top: 2px solid rgba(0, 0, 0, 0);
+    text-transform: uppercase;
 
     &:last-child {
       margin-right: 2.86rem;
