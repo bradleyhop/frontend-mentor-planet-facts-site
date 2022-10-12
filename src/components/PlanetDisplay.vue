@@ -31,11 +31,27 @@ export default {
 
   computed: {
     imageUrl() {
-      // this is going to need more logic to show planet layer
-      return new URL(
-        `${this.planet.images[this.imgLayer[this.num]]}`,
-        import.meta.url
-      ).href;
+      let imgLink;
+
+      // surface geology image is overlayed on the Overview image
+      if (this.num === 2) {
+        imgLink = new URL(
+          `${this.planet.images[this.imgLayer[0]]}`,
+          import.meta.url
+        ).href;
+      } else {
+        imgLink = new URL(
+          `${this.planet.images[this.imgLayer[this.num]]}`,
+          import.meta.url
+        ).href;
+      }
+
+      return imgLink;
+    },
+
+    geologyImgUrl() {
+      return new URL(`${this.planet.images[this.imgLayer[2]]}`, import.meta.url)
+        .href;
     },
 
     paragraphCopy() {
@@ -58,51 +74,60 @@ export default {
 </script>
 
 <template>
-  <div class="img-container">
-    <img class="planet-img" :src="imageUrl" />
-  </div>
-
-  <h1 class="page-title header-1">{{ planet.name }}</h1>
-
-  <!-- only one child will be displayed at a time -->
-  <div class="layer-info-container">
-    <p class="para-p para-structure">
-      {{ paragraphCopy }}
-    </p>
-
-    <div class="source">
-      Source :
-      <a
-        :href="sourceLink"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="wiki-text-link"
-        >Wikipedia
-        <span
-          ><img
-            src="@/assets/img/icon-source.svg"
-            class="icon-img"
-            alt="link to Wikipedia source article"
-        /></span>
-      </a>
+  <div class="upper-container">
+    <div class="img-container">
+      <div class="center-planets">
+        <img class="planet-img" :src="imageUrl" />
+        <img v-if="num === 2" :src="geologyImgUrl" class="geology-image" />
+      </div>
     </div>
-  </div>
 
-  <!-- buttons to select information layer -->
-  <div class="fact-menu">
-    <button class="button-itself" @click="setPlanetView(0)">
-      <span class="button-number">01</span
-      ><span class="button-text"> Overview</span>
-    </button>
-    <button class="button-itself" @click="setPlanetView(1)">
-      <span class="button-number">02</span>
-      <span class="button-text">Internal Structure</span>
-    </button>
-    <button class="button-itself" @click="setPlanetView(2)">
-      <span class="button-number">03</span
-      ><span class="button-text">Surface Geology</span>
-    </button>
+    <div class="planet-content-container">
+      <h1 class="page-title header-1">{{ planet.name }}</h1>
+
+      <!-- only one child will be displayed at a time -->
+      <div class="layer-info-container">
+        <p class="para-p para-structure">
+          {{ paragraphCopy }}
+        </p>
+
+        <div class="source">
+          Source :
+          <a
+            :href="sourceLink"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="wiki-text-link"
+            >Wikipedia
+            <span
+              ><img
+                src="@/assets/img/icon-source.svg"
+                class="icon-img"
+                alt="link to Wikipedia source article"
+            /></span>
+          </a>
+        </div>
+      </div>
+
+      <!-- buttons to select information layer -->
+      <div class="fact-menu">
+        <button class="button-itself backgroundz" @click="setPlanetView(0)">
+          <span class="button-number">01</span>
+          <span class="button-text">Overview</span>
+        </button>
+        <button class="button-itself" @click="setPlanetView(1)">
+          <span class="button-number">02</span>
+          <span class="button-text">Internal Structure</span>
+        </button>
+        <button class="button-itself" @click="setPlanetView(2)">
+          <span class="button-number">03</span>
+          <span class="button-text">Surface Geology</span>
+        </button>
+      </div>
+    </div>
+    <!-- .planet-content-container -->
   </div>
+  <!-- .upper-container -->
 
   <!-- fact boxes -->
   <div class="number-facts-container">
@@ -129,9 +154,39 @@ export default {
 </template>
 
 <style lang="scss">
-.planet-img {
-  height: 15rem;
-  width: 15rem;
+.upper-container {
+  display: flex;
+  flex-direction: row;
+  min-height: 700px; // CHANGE ME!
+}
+
+.img-container {
+  flex-grow: 1;
+  position: relative;
+
+  .center-planets {
+    // flex won't work here
+    // horizontal
+    text-align: center;
+    // vertical
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  // still need to get this on top of the other
+  .geology-image {
+    height: 14.21rem;
+    width: 11.64rem;
+  }
+}
+
+.planet-content-container {
+  flex: 0 0 25rem; // sets width and doesn't grow nor shrink
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .page-title {
@@ -144,6 +199,7 @@ export default {
 }
 
 .para-structure {
+  height: 10.71rem; // must be set to keep all elements in parent constant
   margin-bottom: 1.71rem;
 }
 
@@ -151,11 +207,12 @@ export default {
   font-family: $spartan-font;
   font-size: 1rem;
   line-height: 1.79rem;
-  opacity: 0.5;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 2.79rem;
 
   .wiki-text-link {
     font-weight: 700;
-    color: $white;
+    color: rgba(255, 255, 255, 0.5);
     text-decoration: underline;
   }
 
@@ -164,23 +221,21 @@ export default {
     width: 0.86rem;
     margin-left: 0.57rem;
   }
-
-  // taking liberty here; not specified but seems reasonable
-  &:hover {
-    opacity: 1;
-  }
 }
 
 .fact-menu {
   display: flex;
   flex-direction: column;
-  max-width: 50%; // change me
-  margin: 2rem 0; // change me
+  margin-bottom: 1.14rem;
 
   .button-itself {
     margin-bottom: 1.14rem;
     padding: 12px 0 11px 0;
-    background-color: $blackish;
+    background-color: rgba(7, 7, 36, 0.2);
+
+    &:hover {
+      background-color: rgb(216, 216, 216, 0.2);
+    }
   }
 
   .button-number {
@@ -194,6 +249,15 @@ export default {
     letter-spacing: 2.5px;
     text-transform: uppercase;
     color: $white;
+  }
+
+  .backgroundz {
+    background-color: v-bind(pColor);
+    border: 1px solid v-bind(pColor);
+
+    &:hover {
+      background-color: v-bind(pColor);
+    }
   }
 }
 
