@@ -47,23 +47,24 @@ body {
 // set max-widths for content
 .device-widths {
   @include tablet-breakpoint {
-    width: 80vw;
+    width: 90vw;
   }
 
   @include desktop-breakpoint {
-    width: 60vw;
+    width: 80vw;
   }
 
   @include large-desktop-breakpoint {
-    width: 40vw;
+    width: 60vw;
   }
 
   margin: auto;
-  width: 90vw;
+  width: 100vw;
 }
 
 // buttons
 button {
+  appearance: none;
   border: 1px solid rgba(255, 255, 255, 0.2);
   cursor: pointer;
   text-align: left;
