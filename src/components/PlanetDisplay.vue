@@ -8,6 +8,12 @@ export default {
       planetInfo: ["overview", "structure", "geology"],
       imgLayer: ["planet", "internal", "geology"], // diff names for img sources
       num: 0, // overview is the default planet layer view
+      // buttons to select planet view; need this to show active background
+      buttons: [
+        { name: "Overview", number: "01", fn: "setPlanetView(0)" },
+        { name: "Internal Structure", number: "02", fn: "setPlanetView(1)" },
+        { name: "Surface Geology", number: "03", fn: "setPlanetView(2)" },
+      ],
     };
   },
 
@@ -111,15 +117,27 @@ export default {
 
       <!-- buttons to select information layer -->
       <div class="fact-menu">
-        <button class="button-itself backgroundz" @click="setPlanetView(0)">
+        <button
+          class="button-itself"
+          :class="this.num === 0 ? 'activeButton' : ''"
+          @click="setPlanetView(0)"
+        >
           <span class="button-number">01</span>
           <span class="button-text">Overview</span>
         </button>
-        <button class="button-itself" @click="setPlanetView(1)">
+        <button
+          class="button-itself"
+          :class="this.num === 1 ? 'activeButton' : ''"
+          @click="setPlanetView(1)"
+        >
           <span class="button-number">02</span>
           <span class="button-text">Internal Structure</span>
         </button>
-        <button class="button-itself" @click="setPlanetView(2)">
+        <button
+          class="button-itself"
+          :class="this.num === 2 ? 'activeButton' : ''"
+          @click="setPlanetView(2)"
+        >
           <span class="button-number">03</span>
           <span class="button-text">Surface Geology</span>
         </button>
@@ -251,7 +269,7 @@ export default {
     color: $white;
   }
 
-  .backgroundz {
+  .activeButton {
     background-color: v-bind(pColor);
     border: 1px solid v-bind(pColor);
 
