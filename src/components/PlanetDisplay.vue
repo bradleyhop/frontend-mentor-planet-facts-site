@@ -179,24 +179,28 @@ export default {
 }
 
 .img-container {
+  display: flex;
   flex-grow: 1;
   position: relative;
 
   .center-planets {
-    // flex won't work here
-    // horizontal
-    text-align: center;
-    // vertical
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: auto;
     position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
 
-  // still need to get this on top of the other
-  .geology-image {
-    height: 14.21rem;
-    width: 11.64rem;
+    .planet-img {
+      height: auto;
+      max-width: 100%;
+    }
+
+    .geology-image {
+      height: auto;
+      max-width: 11.64rem; // set to non%
+      position: absolute;
+      top: 66%;
+    }
   }
 }
 
@@ -252,7 +256,8 @@ export default {
     background-color: rgba(7, 7, 36, 0.2);
 
     &:hover {
-      background-color: rgb(216, 216, 216, 0.2);
+      background-color: rgba(216, 216, 216, 0.2);
+      border: 1px solid rgba(216, 216, 216, 0); // to blend in with background
     }
   }
 
@@ -283,6 +288,7 @@ export default {
   display: grid;
   column-gap: 2.14rem;
   grid-template-columns: repeat(4, 1fr);
+  margin-bottom: 2rem;
 
   .grid-outline {
     border: 1px solid rgba(255, 255, 255, 0.2);
