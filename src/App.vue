@@ -155,52 +155,69 @@ export default {
 header {
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
   min-height: 6rem;
-}
 
-.logo-container {
-  display: flex;
-  align-items: center;
-  margin-left: 2.28rem;
-}
-
-.logo-text {
-  font-family: $antonio-font;
-  font-size: 2rem;
-  letter-spacing: -1.05px;
-  line-height: 2.57rem;
-  text-transform: uppercase;
-}
-
-.menu-list {
-  display: flex;
-  height: 100%;
-  list-style: none;
-  align-items: center;
-
-  // hover color based on what planet user is hovering over in the mneu
-  .accentBorderColor:hover {
-    border-color: v-bind(hoverColor);
+  @include tablet-breakpoint {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
-  .menu-item {
-    cursor: pointer;
-    margin: 0 1.18rem;
-    opacity: 0.75;
-    // pushes border-top to top of div
-    padding: 2rem 0;
-    // makes room for border-top hover effect
-    border-top: 2px solid rgba(0, 0, 0, 0);
-    text-transform: uppercase;
+  @include desktop-breakpoint {
+    flex-direction: row;
+    justify-content: space-between;
+  }
 
-    &:last-child {
-      margin-right: 2.86rem;
+  .logo-container {
+    display: flex;
+    align-items: center;
+    margin-left: 2.28rem;
+  }
+
+  .logo-text {
+    font-family: $antonio-font;
+    font-size: 2rem;
+    letter-spacing: -1.05px;
+    line-height: 2.57rem;
+    text-transform: uppercase;
+  }
+
+  .menu-list {
+    display: flex;
+    height: 100%;
+    list-style: none;
+    align-items: center;
+
+    // hover color based on what planet user is hovering over in the mneu
+    .accentBorderColor:hover {
+      border-color: v-bind(hoverColor);
     }
 
-    &:hover {
-      opacity: 1;
+    .menu-item {
+      cursor: pointer;
+      margin: 0 1.18rem;
+      opacity: 0.75;
+      // pushes border-top to top of div
+      padding: 2rem 0;
+      // makes room for border-top hover effect
+      border-top: 2px solid rgba(0, 0, 0, 0);
+      text-transform: uppercase;
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+      &:last-child {
+        margin-right: initial;
+
+        @include desktop-breakpoint {
+          margin-right: 2.86rem;
+        }
+      }
+
+      &:hover {
+        opacity: 1;
+      }
     }
   }
 }
