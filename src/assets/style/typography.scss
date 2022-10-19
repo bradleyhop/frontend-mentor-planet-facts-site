@@ -1,3 +1,5 @@
+// much of the font size is set for desktop
+
 $antonio-font:  'Antonio', sans-serif;
 $spartan-font:  'Spartan', sans-serif;
 
@@ -12,21 +14,21 @@ html {
   line-height: 1.79rem;
 }
 
-.header-1 {
+@mixin header-1 {
   font-family: $antonio-font;
   font-size: 5.7rem;
   line-height: 7.4rem;
   text-transform: uppercase;
 }
 
-.header-2 {
+@mixin header-2 {
   font-family: $antonio-font;
   font-size: 2.86rem;
   letter-spacing: -1.5px;
   line-height: 3.7rem;
 }
 
-.header-3 {
+@mixin header-3 {
   font-family: $spartan-font;
   font-size: 0.86rem;
   font-weight: bold;
@@ -34,7 +36,7 @@ html {
   line-height: 1.79rem;
 }
 
-.header-4 {
+@mixin header-4 {
   font-family: $spartan-font;
   font-size: 0.79rem;
   font-weight: bold;
