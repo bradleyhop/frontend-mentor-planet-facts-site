@@ -71,7 +71,7 @@ export default {
     <nav>
       <ul class="menu-list">
         <li
-          class="header-4 menu-item"
+          class="menu-item"
           @click="setNewPlanet(0)"
           @mouseenter="setHoverColor(0)"
           @mouseleave="hover = false"
@@ -80,7 +80,7 @@ export default {
           MERCURY
         </li>
         <li
-          class="header-4 menu-item"
+          class="menu-item"
           @click="setNewPlanet(1)"
           @mouseenter="setHoverColor(1)"
           @mouseleave="hover = false"
@@ -89,7 +89,7 @@ export default {
           VENUS
         </li>
         <li
-          class="header-4 menu-item"
+          class="menu-item"
           @click="setNewPlanet(2)"
           @mouseenter="setHoverColor(2)"
           @mouseleave="hover = false"
@@ -98,7 +98,7 @@ export default {
           EARTH
         </li>
         <li
-          class="header-4 menu-item"
+          class="menu-item"
           @click="setNewPlanet(3)"
           @mouseenter="setHoverColor(3)"
           @mouseleave="hover = false"
@@ -107,7 +107,7 @@ export default {
           MARS
         </li>
         <li
-          class="header-4 menu-item"
+          class="menu-item"
           @click="setNewPlanet(4)"
           @mouseenter="setHoverColor(4)"
           @mouseleave="hover = false"
@@ -116,7 +116,7 @@ export default {
           JUPITER
         </li>
         <li
-          class="header-4 menu-item"
+          class="menu-item"
           @click="setNewPlanet(5)"
           @mouseenter="setHoverColor(5)"
           @mouseleave="hover = false"
@@ -125,7 +125,7 @@ export default {
           SATURN
         </li>
         <li
-          class="header-4 menu-item"
+          class="menu-item"
           @click="setNewPlanet(6)"
           @mouseenter="setHoverColor(6)"
           @mouseleave="hover = false"
@@ -134,7 +134,7 @@ export default {
           URANUS
         </li>
         <li
-          class="header-4 menu-item"
+          class="menu-item"
           @click="setNewPlanet(7)"
           @mouseenter="setHoverColor(7)"
           @mouseleave="hover = false"
@@ -171,7 +171,14 @@ header {
   .logo-container {
     display: flex;
     align-items: center;
-    margin-left: 2.28rem;
+
+    @include tablet-breakpoint {
+      margin: 2.29rem 0 0 0;
+    }
+
+    @include desktop-breakpoint {
+      margin: 0 0 0 2.28rem;
+    }
   }
 
   .logo-text {
@@ -202,6 +209,7 @@ header {
       // makes room for border-top hover effect
       border-top: 2px solid rgba(0, 0, 0, 0);
       text-transform: uppercase;
+      @include header-4;
 
       &:first-child {
         margin-left: 0;

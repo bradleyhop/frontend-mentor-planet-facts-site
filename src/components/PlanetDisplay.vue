@@ -89,10 +89,10 @@ export default {
     </div>
 
     <div class="planet-content-container">
-      <h1 class="page-title header-1">{{ planet.name }}</h1>
-
       <!-- only one child will be displayed at a time -->
       <div class="layer-info-container">
+        <h1 class="page-title">{{ planet.name }}</h1>
+
         <p class="para-p para-structure">
           {{ paragraphCopy }}
         </p>
@@ -150,23 +150,23 @@ export default {
   <!-- fact boxes -->
   <div class="number-facts-container">
     <div class="rotation-container grid-outline">
-      <div class="title-fact header-4">Rotation Time</div>
-      <div class="number-fact header-2">{{ planet.rotation }}</div>
+      <div class="title-fact">Rotation Time</div>
+      <div class="number-fact">{{ planet.rotation }}</div>
     </div>
 
     <div class="revolution-container grid-outline">
-      <div class="title-fact header-4">Revolution Time</div>
-      <div class="number-fact header-2">{{ planet.revolution }}</div>
+      <div class="title-fact">Revolution Time</div>
+      <div class="number-fact">{{ planet.revolution }}</div>
     </div>
 
     <div class="radius-container grid-outline">
-      <div class="title-fact header-4">Radius</div>
-      <div class="number-fact header-2">{{ planet.radius }}</div>
+      <div class="title-fact">Radius</div>
+      <div class="number-fact">{{ planet.radius }}</div>
     </div>
 
     <div class="temp-container grid-outline">
-      <div class="title-fact header-4">Average Temp.</div>
-      <div class="number-fact header-2">{{ planet.temperature }}</div>
+      <div class="title-fact">Average Temp.</div>
+      <div class="number-fact">{{ planet.temperature }}</div>
     </div>
   </div>
 </template>
@@ -174,112 +174,153 @@ export default {
 <style lang="scss">
 .upper-container {
   display: flex;
-  flex-direction: row;
-  min-height: 700px; // CHANGE ME!
-}
 
-.img-container {
-  display: flex;
-  flex-grow: 1;
-  position: relative;
+  @include tablet-breakpoint {
+    flex-direction: column;
+  }
 
-  .center-planets {
-    align-items: center;
+  @include desktop-breakpoint {
+    flex-direction: row;
+  }
+
+  .img-container {
+    display: flex;
+    flex-grow: 1;
+    position: relative;
+    min-height: 700px; // CHANGE ME!
+
+    .center-planets {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      margin: auto;
+      position: relative;
+
+      .planet-img {
+        height: auto;
+        max-width: 100%;
+      }
+
+      .geology-image {
+        height: auto;
+        max-width: 11.64rem; // set to non%
+        position: absolute;
+        top: 66%;
+      }
+    }
+  }
+
+  .planet-content-container {
+    flex: 0 0 25rem; // sets width and doesn't grow nor shrink
     display: flex;
     justify-content: center;
-    margin: auto;
-    position: relative;
 
-    .planet-img {
-      height: auto;
-      max-width: 100%;
+    @include tablet-breakpoint {
+      flex-direction: row;
     }
 
-    .geology-image {
-      height: auto;
-      max-width: 11.64rem; // set to non%
-      position: absolute;
-      top: 66%;
+    @include desktop-breakpoint {
+      flex-direction: column;
+    }
+
+    .page-title {
+      margin-bottom: 1.64rem;
+      text-transform: uppercase;
+      @include header-1;
+    }
+
+    .layer-info-container {
+      min-height: 10rem;
+
+      @include tablet-breakpoint {
+        width: 50%;
+      }
+
+      @include desktop-breakpoint {
+        width: 100%;
+      }
+    }
+
+    .para-structure {
+      height: 10.71rem; // must be set to keep all elements in parent constant
+      margin-bottom: 1.71rem;
+    }
+
+    .source {
+      font-family: $spartan-font;
+      font-size: 1rem;
+      line-height: 1.79rem;
+      color: rgba(255, 255, 255, 0.5);
+      margin-bottom: 2.79rem;
+
+      .wiki-text-link {
+        font-weight: 700;
+        color: rgba(255, 255, 255, 0.5);
+        text-decoration: underline;
+      }
+
+      .icon-img {
+        height: 0.86rem;
+        width: 0.86rem;
+        margin-left: 0.57rem;
+      }
     }
   }
-}
 
-.planet-content-container {
-  flex: 0 0 25rem; // sets width and doesn't grow nor shrink
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.page-title {
-  margin-bottom: 1.64rem;
-  text-transform: uppercase;
-}
-
-.layer-info-container {
-  min-height: 10rem;
-}
-
-.para-structure {
-  height: 10.71rem; // must be set to keep all elements in parent constant
-  margin-bottom: 1.71rem;
-}
-
-.source {
-  font-family: $spartan-font;
-  font-size: 1rem;
-  line-height: 1.79rem;
-  color: rgba(255, 255, 255, 0.5);
-  margin-bottom: 2.79rem;
-
-  .wiki-text-link {
-    font-weight: 700;
-    color: rgba(255, 255, 255, 0.5);
-    text-decoration: underline;
-  }
-
-  .icon-img {
-    height: 0.86rem;
-    width: 0.86rem;
-    margin-left: 0.57rem;
-  }
-}
-
-.fact-menu {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1.14rem;
-
-  .button-itself {
+  .fact-menu {
+    display: flex;
+    flex-direction: column;
     margin-bottom: 1.14rem;
-    padding: 12px 0 11px 0;
-    background-color: rgba(7, 7, 36, 0.2);
 
-    &:hover {
-      background-color: rgba(216, 216, 216, 0.2);
-      border: 1px solid rgba(216, 216, 216, 0); // to blend in with background
+    @include tablet-breakpoint {
+      width: 50%;
+      align-items: end;
+      justify-content: center;
     }
-  }
 
-  .button-number {
-    color: $white;
-    letter-spacing: 2.5px;
-    margin: 0 2rem;
-    opacity: 0.5;
-  }
+    @include desktop-breakpoint {
+      width: 100%;
+    }
 
-  .button-text {
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: $white;
-  }
+    .button-itself {
+      margin-bottom: 1.14rem;
+      padding: 12px 0 11px 0;
+      background-color: rgba(7, 7, 36, 0.2);
 
-  .activeButton {
-    background-color: v-bind(pColor);
-    border: 1px solid v-bind(pColor);
+      &:hover {
+        background-color: rgba(216, 216, 216, 0.2);
+        border: 1px solid rgba(216, 216, 216, 0); // to blend in with background
+      }
 
-    &:hover {
+      @include tablet-breakpoint {
+        width: 80%;
+      }
+
+      @include desktop-breakpoint {
+        width: 100%;
+      }
+    }
+
+    .button-number {
+      color: $white;
+      letter-spacing: 2.5px;
+      margin: 0 2rem;
+      opacity: 0.5;
+    }
+
+    .button-text {
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: $white;
+    }
+
+    .activeButton {
       background-color: v-bind(pColor);
+      border: 1px solid v-bind(pColor);
+
+      &:hover {
+        background-color: v-bind(pColor);
+      }
     }
   }
 }
@@ -298,10 +339,22 @@ export default {
   .title-fact {
     text-transform: uppercase;
     opacity: 0.5;
+    @include header-4;
   }
 
   .number-fact {
     text-transform: uppercase;
+    @include header-2;
+
+    @include tablet-breakpoint {
+      font-size: 1.71rem;
+      line-height: 2.21rem;
+    }
+
+    @include desktop-breakpoint {
+      font-size: 2.86rem;
+      line-height: 3.7rem;
+    }
   }
 }
 </style>

@@ -71,9 +71,9 @@ button {
 }
 
 .button-number {
-  @extend .header-4;
+  @include header-4;
 }
 
 .button-text {
-  @extend .header-4;
+  @include header-4;
 }
