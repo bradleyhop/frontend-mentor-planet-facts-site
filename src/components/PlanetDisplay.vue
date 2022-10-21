@@ -93,7 +93,7 @@ export default {
       <div class="layer-info-container">
         <h1 class="page-title">{{ planet.name }}</h1>
 
-        <p class="para-p para-structure">
+        <p class="para-structure">
           {{ paragraphCopy }}
         </p>
 
@@ -164,7 +164,7 @@ export default {
       <div class="number-fact">{{ planet.radius }}</div>
     </div>
 
-    <div class="temp-container grid-outline">
+    <div class="grid-outline">
       <div class="title-fact">Average Temp.</div>
       <div class="number-fact">{{ planet.temperature }}</div>
     </div>
@@ -187,7 +187,14 @@ export default {
     display: flex;
     flex-grow: 1;
     position: relative;
-    min-height: 700px; // CHANGE ME!
+
+    @include tablet-breakpoint {
+      min-height: 35rem;
+    }
+
+    @include desktop-breakpoint {
+      min-height: 50rem;
+    }
 
     .center-planets {
       align-items: center;
@@ -198,42 +205,71 @@ export default {
 
       .planet-img {
         height: auto;
-        max-width: 100%;
+
+        @include tablet-breakpoint {
+          max-width: 65%;
+        }
+
+        @include desktop-breakpoint {
+          max-width: 100%;
+        }
       }
 
       .geology-image {
         height: auto;
-        max-width: 11.64rem; // set to non%
         position: absolute;
         top: 66%;
+
+        @include tablet-breakpoint {
+          max-width: 9rem;
+        }
+
+        @include desktop-breakpoint {
+          max-width: 11.64rem; // set to not a %
+        }
       }
     }
   }
 
   .planet-content-container {
-    flex: 0 0 25rem; // sets width and doesn't grow nor shrink
     display: flex;
     justify-content: center;
 
     @include tablet-breakpoint {
       flex-direction: row;
+      flex: 0 0 19rem;
     }
 
     @include desktop-breakpoint {
       flex-direction: column;
+      flex: 0 0 25rem; // sets width and doesn't grow nor shrink
     }
 
     .page-title {
-      margin-bottom: 1.64rem;
-      text-transform: uppercase;
+      margin-bottom: 1.71rem;
+      font-size: 2.86rem;
+      line-height: 3.71rem;
+      text-align: center;
       @include header-1;
+
+      @include tablet-breakpoint {
+        font-size: 3.43rem;
+        line-height: 4.43rem;
+        text-align: left;
+      }
+
+      @include desktop-breakpoint {
+        font-size: 5.7rem;
+        line-height: 7.4rem;
+      }
     }
 
     .layer-info-container {
-      min-height: 10rem;
 
       @include tablet-breakpoint {
         width: 50%;
+        display: flex;
+        flex-direction: column;
       }
 
       @include desktop-breakpoint {
@@ -242,16 +278,39 @@ export default {
     }
 
     .para-structure {
-      height: 10.71rem; // must be set to keep all elements in parent constant
-      margin-bottom: 1.71rem;
+      @include para-p;
+      text-align: center;
+
+      @include tablet-breakpoint {
+        font-size: 0.79rem;
+        line-height: 1.57rem;
+        margin-bottom: 2.29rem;
+        text-align: left;
+      }
+
+      @include desktop-breakpoint {
+        font-size: 1rem;
+        height: 10.71rem; // must be set to keep all elements in parent constant
+        line-height: 1.79rem;
+        margin-bottom: 1.71rem;
+      }
     }
 
     .source {
       font-family: $spartan-font;
-      font-size: 1rem;
-      line-height: 1.79rem;
       color: rgba(255, 255, 255, 0.5);
-      margin-bottom: 2.79rem;
+
+      @include tablet-breakpoint {
+        font-size: 0.86rem;
+        line-height: 1.79rem;
+        margin-bottom: 0;
+      }
+
+      @include desktop-breakpoint {
+        font-size: 1rem;
+        line-height: 1.79rem;
+        margin-bottom: 2.79rem;
+      }
 
       .wiki-text-link {
         font-weight: 700;
@@ -270,7 +329,6 @@ export default {
   .fact-menu {
     display: flex;
     flex-direction: column;
-    margin-bottom: 1.14rem;
 
     @include tablet-breakpoint {
       width: 50%;
@@ -283,9 +341,12 @@ export default {
     }
 
     .button-itself {
-      margin-bottom: 1.14rem;
-      padding: 12px 0 11px 0;
+      appearance: none;
       background-color: rgba(7, 7, 36, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      margin-bottom: 1.14rem;
+      text-align: left;
 
       &:hover {
         background-color: rgba(216, 216, 216, 0.2);
@@ -293,10 +354,12 @@ export default {
       }
 
       @include tablet-breakpoint {
+        padding: 8px 0 7px 0;
         width: 80%;
       }
 
       @include desktop-breakpoint {
+        padding: 12px 0 11px 0;
         width: 100%;
       }
     }
@@ -306,12 +369,32 @@ export default {
       letter-spacing: 2.5px;
       margin: 0 2rem;
       opacity: 0.5;
+      @include header-4;
+
+      @include tablet-breakpoint {
+        font-size: 0.64rem;
+        line-height: 1.79rem;
+      }
+
+      @include desktop-breakpoint {
+        font-size: 0.86rem;
+      }
     }
 
     .button-text {
+      color: $white;
       letter-spacing: 2.5px;
       text-transform: uppercase;
-      color: $white;
+      @include header-4;
+
+      @include tablet-breakpoint {
+        font-size: 0.64rem;
+        line-height: 1.79rem;
+      }
+
+      @include desktop-breakpoint {
+        font-size: 0.86rem;
+      }
     }
 
     .activeButton {
@@ -333,13 +416,32 @@ export default {
 
   .grid-outline {
     border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 1.43rem 0 1.93rem 1.64rem;
+
+    @include tablet-breakpoint {
+      padding: 1.14rem 0 1.36rem 1.07rem;
+    }
+
+    @include desktop-breakpoint {
+      padding: 1.43rem 0 1.93rem 1.64rem;
+    }
   }
 
   .title-fact {
     text-transform: uppercase;
     opacity: 0.5;
     @include header-4;
+
+    @include tablet-breakpoint {
+      font-size: 0.57rem;
+      line-height: 1.14rem;
+      letter-spacing: 0.72px;
+    }
+
+    @include desktop-breakpoint {
+      font-size: 0.79rem;
+      line-height: 1.79rem;
+      letter-spacing: 1px;
+    }
   }
 
   .number-fact {
@@ -348,11 +450,13 @@ export default {
 
     @include tablet-breakpoint {
       font-size: 1.71rem;
+      letter-spacing: -0.9px;
       line-height: 2.21rem;
     }
 
     @include desktop-breakpoint {
       font-size: 2.86rem;
+      letter-spacing: -1.5px;
       line-height: 3.7rem;
     }
   }

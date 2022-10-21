@@ -9,17 +9,17 @@
 *,
 *::before,
 *::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 body {
   background-color: $blackish;
   background-image: url(../img/background-stars.svg);
+  background-repeat: repeat;
   color: $white;
   object-fit: cover;
-  background-repeat: repeat;
 }
 
 /*
@@ -60,20 +60,4 @@ body {
 
   margin: auto;
   width: 100vw;
-}
-
-// buttons
-button {
-  appearance: none;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  cursor: pointer;
-  text-align: left;
-}
-
-.button-number {
-  @include header-4;
-}
-
-.button-text {
-  @include header-4;
 }
