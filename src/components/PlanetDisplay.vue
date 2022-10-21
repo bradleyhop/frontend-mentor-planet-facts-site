@@ -30,8 +30,8 @@ export default {
   },
 
   methods: {
-    setPlanetView: function (which) {
-      this.num = which;
+    setPlanetView: function (whichOne) {
+      this.num = whichOne;
     },
   },
 
@@ -80,104 +80,165 @@ export default {
 </script>
 
 <template>
-  <div class="upper-container">
-    <div class="img-container">
-      <div class="center-planets">
-        <img class="planet-img" :src="imageUrl" />
-        <img v-if="num === 2" :src="geologyImgUrl" class="geology-image" />
-      </div>
-    </div>
+  <div class="mobile-layer-menu">
+    <button
+      class="mobile-button"
+      :class="this.num === 0 ? 'mobile-active-button' : ''"
+      @click="setPlanetView(0)"
+    >
+      <span class="button-text">Overview</span>
+    </button>
+    <button
+      class="mobile-button"
+      :class="this.num === 1 ? 'mobile-active-button' : ''"
+      @click="setPlanetView(1)"
+    >
+      <span class="button-text">Structure</span>
+    </button>
+    <button
+      class="mobile-button"
+      :class="this.num === 2 ? 'mobile-active-button' : ''"
+      @click="setPlanetView(2)"
+    >
+      <span class="button-text">Surface</span>
+    </button>
+  </div>
+  <!-- .mobile-layer-menu -->
 
-    <div class="planet-content-container">
-      <!-- only one child will be displayed at a time -->
-      <div class="layer-info-container">
-        <h1 class="page-title">{{ planet.name }}</h1>
+  <div class="device-widths">
+    <div class="upper-container">
+      <!-- planet layer info buttons viewable only on mobile -->
 
-        <p class="para-structure">
-          {{ paragraphCopy }}
-        </p>
-
-        <div class="source">
-          Source :
-          <a
-            :href="sourceLink"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="wiki-text-link"
-            >Wikipedia
-            <span
-              ><img
-                src="@/assets/img/icon-source.svg"
-                class="icon-img"
-                alt="link to Wikipedia source article"
-            /></span>
-          </a>
+      <div class="img-container">
+        <div class="center-planets">
+          <img class="planet-img" :src="imageUrl" />
+          <img v-if="num === 2" :src="geologyImgUrl" class="geology-image" />
         </div>
       </div>
 
-      <!-- buttons to select information layer -->
-      <div class="fact-menu">
-        <button
-          class="button-itself"
-          :class="this.num === 0 ? 'activeButton' : ''"
-          @click="setPlanetView(0)"
-        >
-          <span class="button-number">01</span>
-          <span class="button-text">Overview</span>
-        </button>
-        <button
-          class="button-itself"
-          :class="this.num === 1 ? 'activeButton' : ''"
-          @click="setPlanetView(1)"
-        >
-          <span class="button-number">02</span>
-          <span class="button-text">Internal Structure</span>
-        </button>
-        <button
-          class="button-itself"
-          :class="this.num === 2 ? 'activeButton' : ''"
-          @click="setPlanetView(2)"
-        >
-          <span class="button-number">03</span>
-          <span class="button-text">Surface Geology</span>
-        </button>
+      <div class="planet-content-container">
+        <!-- only one child will be displayed at a time -->
+        <div class="layer-info-container">
+          <h1 class="page-title">{{ planet.name }}</h1>
+
+          <p class="para-structure">
+            {{ paragraphCopy }}
+          </p>
+
+          <div class="source">
+            Source :
+            <a
+              :href="sourceLink"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="wiki-text-link"
+              >Wikipedia
+              <span
+                ><img
+                  src="@/assets/img/icon-source.svg"
+                  class="icon-img"
+                  alt="link to Wikipedia source article"
+              /></span>
+            </a>
+          </div>
+        </div>
+
+        <!-- visible only on tablet larger devices; buttons to select information layer -->
+        <div class="fact-menu">
+          <button
+            class="button-itself"
+            :class="this.num === 0 ? 'active-button' : ''"
+            @click="setPlanetView(0)"
+          >
+            <span class="button-number">01</span>
+            <span class="button-text">Overview</span>
+          </button>
+          <button
+            class="button-itself"
+            :class="this.num === 1 ? 'active-button' : ''"
+            @click="setPlanetView(1)"
+          >
+            <span class="button-number">02</span>
+            <span class="button-text">Internal Structure</span>
+          </button>
+          <button
+            class="button-itself"
+            :class="this.num === 2 ? 'active-button' : ''"
+            @click="setPlanetView(2)"
+          >
+            <span class="button-number">03</span>
+            <span class="button-text">Surface Geology</span>
+          </button>
+        </div>
+      </div>
+      <!-- .planet-content-container -->
+    </div>
+    <!-- .upper-container -->
+
+    <!-- fact boxes -->
+    <div class="number-facts-container">
+      <div class="rotation-container grid-outline">
+        <div class="title-fact">Rotation Time</div>
+        <div class="number-fact">{{ planet.rotation }}</div>
+      </div>
+
+      <div class="revolution-container grid-outline">
+        <div class="title-fact">Revolution Time</div>
+        <div class="number-fact">{{ planet.revolution }}</div>
+      </div>
+
+      <div class="radius-container grid-outline">
+        <div class="title-fact">Radius</div>
+        <div class="number-fact">{{ planet.radius }}</div>
+      </div>
+
+      <div class="grid-outline">
+        <div class="title-fact">Average Temp.</div>
+        <div class="number-fact">{{ planet.temperature }}</div>
       </div>
     </div>
-    <!-- .planet-content-container -->
+    <!-- .fact-boxes -->
   </div>
-  <!-- .upper-container -->
-
-  <!-- fact boxes -->
-  <div class="number-facts-container">
-    <div class="rotation-container grid-outline">
-      <div class="title-fact">Rotation Time</div>
-      <div class="number-fact">{{ planet.rotation }}</div>
-    </div>
-
-    <div class="revolution-container grid-outline">
-      <div class="title-fact">Revolution Time</div>
-      <div class="number-fact">{{ planet.revolution }}</div>
-    </div>
-
-    <div class="radius-container grid-outline">
-      <div class="title-fact">Radius</div>
-      <div class="number-fact">{{ planet.radius }}</div>
-    </div>
-
-    <div class="grid-outline">
-      <div class="title-fact">Average Temp.</div>
-      <div class="number-fact">{{ planet.temperature }}</div>
-    </div>
-  </div>
+  <!-- .device-widths -->
 </template>
 
 <style lang="scss">
-.upper-container {
-  display: flex;
+.mobile-layer-menu {
+  display: inline-flex;
+  justify-content: space-evenly;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  width: 100vw;
 
   @include tablet-breakpoint {
-    flex-direction: column;
+    display: none; // hide when not mobile view
   }
+
+  .mobile-button {
+    appearance: none;
+    background-color: rgba(7, 7, 36, 0.2);
+    border: none;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    font-family: $spartan-font;
+    font-size: 0.64rem;
+    letter-spacing: 1.93px;
+    line-height: 0.71rem;
+    text-transform: uppercase;
+    padding: 1.43rem 0 1.21rem 0; // L&R padding set by flex
+
+    // no hover state needed
+  }
+
+  .mobile-active-button {
+    color: $white;
+    border-bottom: 4px solid v-bind(pColor);
+    padding-bottom: 0.86rem;
+  }
+}
+
+.upper-container {
+  display: flex;
+  flex-direction: column;
 
   @include desktop-breakpoint {
     flex-direction: row;
@@ -187,6 +248,7 @@ export default {
     display: flex;
     flex-grow: 1;
     position: relative;
+    min-height: 25rem;
 
     @include tablet-breakpoint {
       min-height: 35rem;
@@ -205,6 +267,7 @@ export default {
 
       .planet-img {
         height: auto;
+        max-width: 40%;
 
         @include tablet-breakpoint {
           max-width: 65%;
@@ -217,6 +280,7 @@ export default {
 
       .geology-image {
         height: auto;
+        max-width: 7rem; // making a guess here; nothing on design doc
         position: absolute;
         top: 66%;
 
@@ -246,11 +310,11 @@ export default {
     }
 
     .page-title {
+      @include header-1;
       margin-bottom: 1.71rem;
       font-size: 2.86rem;
       line-height: 3.71rem;
       text-align: center;
-      @include header-1;
 
       @include tablet-breakpoint {
         font-size: 3.43rem;
@@ -265,7 +329,6 @@ export default {
     }
 
     .layer-info-container {
-
       @include tablet-breakpoint {
         width: 50%;
         display: flex;
@@ -279,12 +342,12 @@ export default {
 
     .para-structure {
       @include para-p;
+      font-size: 0.79rem;
+      line-height: 1.57rem;
+      margin-bottom: 2.29rem;
       text-align: center;
 
       @include tablet-breakpoint {
-        font-size: 0.79rem;
-        line-height: 1.57rem;
-        margin-bottom: 2.29rem;
         text-align: left;
       }
 
@@ -299,6 +362,8 @@ export default {
     .source {
       font-family: $spartan-font;
       color: rgba(255, 255, 255, 0.5);
+      margin-bottom: 2rem;
+      text-align: center;
 
       @include tablet-breakpoint {
         font-size: 0.86rem;
@@ -327,10 +392,12 @@ export default {
   }
 
   .fact-menu {
-    display: flex;
-    flex-direction: column;
+    display: none; // menu for mobile is above planet image
 
+    // button menus
     @include tablet-breakpoint {
+      display: flex;
+      flex-direction: column;
       width: 50%;
       align-items: end;
       justify-content: center;
@@ -365,11 +432,11 @@ export default {
     }
 
     .button-number {
+      @include header-4;
       color: $white;
       letter-spacing: 2.5px;
       margin: 0 2rem;
       opacity: 0.5;
-      @include header-4;
 
       @include tablet-breakpoint {
         font-size: 0.64rem;
@@ -382,10 +449,10 @@ export default {
     }
 
     .button-text {
+      @include header-4;
       color: $white;
       letter-spacing: 2.5px;
       text-transform: uppercase;
-      @include header-4;
 
       @include tablet-breakpoint {
         font-size: 0.64rem;
@@ -397,7 +464,7 @@ export default {
       }
     }
 
-    .activeButton {
+    .active-button {
       background-color: v-bind(pColor);
       border: 1px solid v-bind(pColor);
 
@@ -410,14 +477,23 @@ export default {
 
 .number-facts-container {
   display: grid;
-  column-gap: 2.14rem;
-  grid-template-columns: repeat(4, 1fr);
-  margin-bottom: 2rem;
+  row-gap: 0.57rem;
+
+  @include tablet-breakpoint {
+    column-gap: 2.14rem;
+    grid-template-columns: repeat(4, 1fr);
+    margin-bottom: 2rem;
+  }
 
   .grid-outline {
+    align-items: center;
     border: 1px solid rgba(255, 255, 255, 0.2);
+    display: inline-flex;
+    justify-content: space-between;
+    padding: 0.64rem 1.71rem 0.93rem 1.71rem;
 
     @include tablet-breakpoint {
+      display: block;
       padding: 1.14rem 0 1.36rem 1.07rem;
     }
 
@@ -427,15 +503,12 @@ export default {
   }
 
   .title-fact {
+    @include header-4;
     text-transform: uppercase;
     opacity: 0.5;
-    @include header-4;
-
-    @include tablet-breakpoint {
-      font-size: 0.57rem;
-      line-height: 1.14rem;
-      letter-spacing: 0.72px;
-    }
+    font-size: 0.57rem;
+    line-height: 1.14rem;
+    letter-spacing: 0.72px;
 
     @include desktop-breakpoint {
       font-size: 0.79rem;
@@ -445,8 +518,11 @@ export default {
   }
 
   .number-fact {
-    text-transform: uppercase;
     @include header-2;
+    text-transform: uppercase;
+    font-size: 1.43rem;
+    letter-spacing: -0.75px;
+    line-height: 1.86rem;
 
     @include tablet-breakpoint {
       font-size: 1.71rem;

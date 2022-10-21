@@ -146,7 +146,7 @@ export default {
     </nav>
   </header>
 
-  <div class="device-widths component-container">
+  <div class="component-container">
     <PlanetDisplay v-if="loaded" :planet="viewPlanet" :pColor="planetColor" />
   </div>
 </template>
@@ -201,6 +201,7 @@ header {
     }
 
     .menu-item {
+      @include header-4;
       cursor: pointer;
       margin: 0 1.18rem;
       opacity: 0.75;
@@ -209,7 +210,6 @@ header {
       // makes room for border-top hover effect
       border-top: 2px solid rgba(0, 0, 0, 0);
       text-transform: uppercase;
-      @include header-4;
 
       &:first-child {
         margin-left: 0;
