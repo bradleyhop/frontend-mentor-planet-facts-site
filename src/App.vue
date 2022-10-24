@@ -11,6 +11,7 @@ export default {
       dataPlanet: {}, // on init, load local json
       viewPlanet: {}, // prop; load a default planet view: Earth
       loaded: false, // show PlanetDisplay component only after json loads
+      toggleMenu: false, // state of pop-over menu for mobile devices
       hover: false, // hover state for menu hover styling
       hoverColor: "", // cover for menu item hover border
       accentColor: [
@@ -60,6 +61,11 @@ export default {
       this.hoverColor = this.accentColor[planetNum];
       this.hover = true;
     },
+
+    // toggle mobile menu
+    setMobileMenu: function () {
+      this.toggleMenu = !this.toggleMenu;
+    },
   },
 };
 </script>
@@ -68,7 +74,15 @@ export default {
   <header>
     <div class="logo-container"><span class="logo-text">THE PLANETS</span></div>
 
-    <nav>
+    <!-- pop-over menu for mobile devices -->
+    <nav class="mobile-menu">
+      <button class="mobile-menu-button" @click="setMobileMenu()">
+        <img src="@/assets/img/icon-hamburger.svg" class="humburger-icon" />
+      </button>
+    </nav>
+
+    <!-- menu list for tablet and larger devices -->
+    <nav class="horizontal-menu">
       <ul class="menu-list">
         <li
           class="menu-item"
@@ -147,7 +161,11 @@ export default {
   </header>
 
   <div class="component-container">
-    <PlanetDisplay v-if="loaded" :planet="viewPlanet" :pColor="planetColor" />
+    <PlanetDisplay
+      v-if="loaded && !toggleMenu"
+      :planet="viewPlanet"
+      :pColor="planetColor"
+    />
   </div>
 </template>
 
@@ -155,12 +173,16 @@ export default {
 header {
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   display: flex;
+  justify-content: space-between;
   min-height: 6rem;
+  width: 100%;
+  padding: 0 1.71rem;
 
   @include tablet-breakpoint {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 0;
   }
 
   @include desktop-breakpoint {
@@ -168,8 +190,29 @@ header {
     justify-content: space-between;
   }
 
+  .mobile-menu {
+    align-self: center;
+
+    @include tablet-breakpoint {
+      display: none;
+    }
+
+    .mobile-menu-button {
+      appearance: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+
+      .hamburger-icon {
+        height: 24px;
+        width: auto;
+      }
+    }
+  }
+
   .logo-container {
     display: flex;
+    flex-grow: 1; // helps to push menu button
     align-items: center;
 
     @include tablet-breakpoint {
@@ -190,10 +233,14 @@ header {
   }
 
   .menu-list {
-    display: flex;
-    height: 100%;
-    list-style: none;
-    align-items: center;
+    display: none;
+
+    @include tablet-breakpoint {
+      display: flex;
+      height: 100%;
+      list-style: none;
+      align-items: center;
+    }
 
     // hover color based on what planet user is hovering over in the mneu
     .accentBorderColor:hover {

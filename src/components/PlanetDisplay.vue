@@ -224,8 +224,7 @@ export default {
     letter-spacing: 1.93px;
     line-height: 0.71rem;
     text-transform: uppercase;
-    padding: 1.43rem 0 1.21rem 0; // L&R padding set by flex
-
+    padding: 1.43rem 0 1.21rem 0; // L&R 'padding' set by flex
     // no hover state needed
   }
 
@@ -478,11 +477,11 @@ export default {
 .number-facts-container {
   display: grid;
   row-gap: 0.57rem;
+  margin-bottom: 1rem;
 
   @include tablet-breakpoint {
     column-gap: 2.14rem;
     grid-template-columns: repeat(4, 1fr);
-    margin-bottom: 2rem;
   }
 
   .grid-outline {
