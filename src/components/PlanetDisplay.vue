@@ -41,23 +41,17 @@ export default {
 
       // surface geology image is overlayed on the Overview image
       if (this.num === 2) {
-        imgLink = new URL(
-          `${this.planet.images[this.imgLayer[0]]}`,
-          import.meta.url
-        ).href;
+        imgLink = this.planet.images[this.imgLayer[0]];
       } else {
-        imgLink = new URL(
-          `${this.planet.images[this.imgLayer[this.num]]}`,
-          import.meta.url
-        ).href;
+        imgLink = this.planet.images[this.imgLayer[this.num]];
       }
 
       return imgLink;
     },
 
     geologyImgUrl() {
-      return new URL(`${this.planet.images[this.imgLayer[2]]}`, import.meta.url)
-        .href;
+      // called and displayed only when the geology view is chosen
+      return this.planet.images[this.imgLayer[2]];
     },
 
     paragraphCopy() {
@@ -225,7 +219,6 @@ export default {
     line-height: 0.71rem;
     text-transform: uppercase;
     padding: 1.43rem 0 1.21rem 0; // L&R 'padding' set by flex
-    // no hover state needed
   }
 
   .mobile-active-button {
