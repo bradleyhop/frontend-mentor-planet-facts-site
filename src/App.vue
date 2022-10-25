@@ -11,6 +11,7 @@ export default {
       dataPlanet: {}, // on init, load local json
       viewPlanet: {}, // prop; load a default planet view: Earth
       loaded: false, // show PlanetDisplay component only after json loads
+      toggleMenu: false, // state of pop-over menu for mobile devices
       hover: false, // hover state for menu hover styling
       hoverColor: "", // cover for menu item hover border
       accentColor: [
@@ -53,12 +54,18 @@ export default {
     setNewPlanet: function (orbitNum) {
       this.viewPlanet = this.dataPlanet[orbitNum];
       this.planetColor = this.accentColor[orbitNum];
+      this.toggleMenu = false; // reset mobile menu
     },
 
     // show corridsponding planet color on selected planet menu item
     setHoverColor: function (planetNum) {
       this.hoverColor = this.accentColor[planetNum];
       this.hover = true;
+    },
+
+    // toggle mobile menu
+    setMobileMenu: function () {
+      this.toggleMenu = !this.toggleMenu;
     },
   },
 };
@@ -68,84 +75,60 @@ export default {
   <header>
     <div class="logo-container"><span class="logo-text">THE PLANETS</span></div>
 
-    <nav>
+    <!-- pop-over menu for mobile devices -->
+    <nav class="mobile-menu">
+      <button class="mobile-menu-button" @click="setMobileMenu()">
+        <img
+          src="@/assets/img/icon-hamburger.svg"
+          alt="press icon for menu list"
+          :class="toggleMenu ? 'hamburger-icon-active' : 'hamburger-icon'"
+        />
+      </button>
+      <!-- mobile menu  -->
+      <nav>
+        <ul v-if="toggleMenu" class="mobile-menu-list">
+          <li
+            v-for="item in dataPlanet"
+            :key="item"
+            class="mobile-menu-item"
+            @click="setNewPlanet(dataPlanet.indexOf(item))"
+          >
+            <span
+              class="bullet-circle"
+              :style="{
+                'background-color': accentColor[dataPlanet.indexOf(item)],
+              }"
+            ></span>
+            <span class="mobile-name">{{ item.name }}</span>
+            <span class="chevron-container">
+              <img
+                src="@/assets/img/icon-chevron.svg"
+                alt="chevron icon for menu item"
+                class="chevron-icon"
+              />
+            </span>
+          </li>
+        </ul>
+      </nav>
+    </nav>
+
+    <!-- menu list for tablet and larger devices -->
+    <nav class="horizontal-menu">
       <ul class="menu-list">
         <li
+          v-for="item in dataPlanet"
+          :key="item"
           class="menu-item"
-          @click="setNewPlanet(0)"
-          @mouseenter="setHoverColor(0)"
+          @click="setNewPlanet(dataPlanet.indexOf(item))"
+          @mouseenter="setHoverColor(dataPlanet.indexOf(item))"
           @mouseleave="hover = false"
           :class="{ accentBorderColor: hover }"
         >
-          MERCURY
-        </li>
-        <li
-          class="menu-item"
-          @click="setNewPlanet(1)"
-          @mouseenter="setHoverColor(1)"
-          @mouseleave="hover = false"
-          :class="{ accentBorderColor: hover }"
-        >
-          VENUS
-        </li>
-        <li
-          class="menu-item"
-          @click="setNewPlanet(2)"
-          @mouseenter="setHoverColor(2)"
-          @mouseleave="hover = false"
-          :class="{ accentBorderColor: hover }"
-        >
-          EARTH
-        </li>
-        <li
-          class="menu-item"
-          @click="setNewPlanet(3)"
-          @mouseenter="setHoverColor(3)"
-          @mouseleave="hover = false"
-          :class="{ accentBorderColor: hover }"
-        >
-          MARS
-        </li>
-        <li
-          class="menu-item"
-          @click="setNewPlanet(4)"
-          @mouseenter="setHoverColor(4)"
-          @mouseleave="hover = false"
-          :class="{ accentBorderColor: hover }"
-        >
-          JUPITER
-        </li>
-        <li
-          class="menu-item"
-          @click="setNewPlanet(5)"
-          @mouseenter="setHoverColor(5)"
-          @mouseleave="hover = false"
-          :class="{ accentBorderColor: hover }"
-        >
-          SATURN
-        </li>
-        <li
-          class="menu-item"
-          @click="setNewPlanet(6)"
-          @mouseenter="setHoverColor(6)"
-          @mouseleave="hover = false"
-          :class="{ accentBorderColor: hover }"
-        >
-          URANUS
-        </li>
-        <li
-          class="menu-item"
-          @click="setNewPlanet(7)"
-          @mouseenter="setHoverColor(7)"
-          @mouseleave="hover = false"
-          :class="{ accentBorderColor: hover }"
-        >
-          NEPTUNE
+          {{ item.name }}
         </li>
       </ul>
     </nav>
   </header>
-
   <div class="component-container">
     <PlanetDisplay v-if="loaded" :planet="viewPlanet" :pColor="planetColor" />
   </div>
@@ -155,12 +138,16 @@ export default {
 header {
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   display: flex;
+  justify-content: space-between;
   min-height: 6rem;
+  width: 100%;
+  padding: 0 1.71rem;
 
   @include tablet-breakpoint {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 0;
   }
 
   @include desktop-breakpoint {
@@ -168,8 +155,89 @@ header {
     justify-content: space-between;
   }
 
+  .mobile-menu {
+    align-self: center;
+
+    @include tablet-breakpoint {
+      display: none;
+    }
+
+    .mobile-menu-button {
+      appearance: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+
+      .hamburger-icon {
+        width: 24px;
+        height: auto;
+      }
+
+      .hamburger-icon-active {
+        @extend .hamburger-icon;
+        opacity: 0.25;
+      }
+    }
+
+    .mobile-menu-list {
+      background-color: $blackish;
+      left: 0;
+      list-style: none;
+      list-style-position: inside;
+      position: absolute;
+      top: 6rem; // set to min-height of <header>
+      width: 100vw;
+      z-index: 9001;
+
+      .mobile-menu-item {
+        @include header-4;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        cursor: pointer;
+        display: flex;
+        font-size: 1.07rem;
+        line-height: 1.79rem;
+        margin: 0 2.29rem 0 1.71rem;
+        padding: 1.43rem 0;
+        text-transform: uppercase;
+
+        .mobile-name {
+          flex-grow: 1;
+        }
+
+        .bullet-circle {
+          align-self: center;
+          border-radius: 50%;
+          display: flex;
+          height: 1.43rem;
+          margin-right: 1.71rem;
+          width: 1.43rem;
+        }
+
+        &:first-child {
+          margin-top: 3.14rem;
+        }
+
+        &:last-child {
+          border-bottom: none;
+          margin-bottom: 4.79rem;
+        }
+
+        .chevron-container {
+          display: flex;
+
+          .chevron-icon {
+            align-self: center;
+            height: auto;
+            width: 4px;
+          }
+        }
+      }
+    }
+  }
+
   .logo-container {
     display: flex;
+    flex-grow: 1; // helps to push menu button
     align-items: center;
 
     @include tablet-breakpoint {
@@ -190,10 +258,14 @@ header {
   }
 
   .menu-list {
-    display: flex;
-    height: 100%;
-    list-style: none;
-    align-items: center;
+    display: none;
+
+    @include tablet-breakpoint {
+      display: flex;
+      height: 100%;
+      list-style: none;
+      align-items: center;
+    }
 
     // hover color based on what planet user is hovering over in the mneu
     .accentBorderColor:hover {
