@@ -1,6 +1,7 @@
 {
   "name": "frontend-mentor-planet-fact-site",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "author": "Bradley Smith",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
