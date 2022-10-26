@@ -337,6 +337,7 @@ export default {
       font-size: 0.79rem;
       line-height: 1.57rem;
       margin-bottom: 2.29rem;
+      min-height: 8rem;
       text-align: center;
 
       @include tablet-breakpoint {

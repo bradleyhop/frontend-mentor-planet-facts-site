@@ -155,6 +155,7 @@ header {
       .hamburger-icon {
         width: 24px;
         height: auto;
+        transition: 200ms ease;
       }
 
       .hamburger-icon-active {
@@ -251,8 +252,8 @@ header {
       align-items: center;
     }
 
-    // hover color based on what planet user is hovering over in the mneu
     .accentBorderColor:hover {
+      // using vue, hover color based on planet accent color
       border-color: v-bind(hoverColor);
     }
 
