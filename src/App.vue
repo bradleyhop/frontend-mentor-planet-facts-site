@@ -1,5 +1,6 @@
 <script>
 import PlanetDisplay from "@/components/PlanetDisplay.vue";
+import planetInfo from "@/assets/data/data.json";
 
 export default {
   components: {
@@ -8,9 +9,8 @@ export default {
 
   data() {
     return {
-      dataPlanet: {}, // on init, load local json
+      dataPlanet: planetInfo, // on init, load local json
       viewPlanet: {}, // prop; load a default planet view: Earth
-      loaded: false, // show PlanetDisplay component only after json loads
       toggleMenu: false, // state of pop-over menu for mobile devices
       hover: false, // hover state for menu hover styling
       hoverColor: "", // cover for menu item hover border
@@ -28,26 +28,10 @@ export default {
     };
   },
 
-  beforeCreate() {
-    // load in default MD text as supplied in our local json file
-    fetch("./src/assets/data/data.json")
-      .then((response) => response.json())
-      .then((data) => {
-        this.dataPlanet = data;
-      })
-      .then(() => {
-        // set Earth as deafult view
-        this.viewPlanet = this.dataPlanet[2];
-        this.planetColor = this.accentColor[2];
-      })
-      .catch(() => {
-        console.error("Data not found!");
-      })
-      .finally(() => {
-        // allow redering of planet content after load;
-        // avoids race conditions, async, etc
-        this.loaded = true;
-      });
+  created() {
+    // set Earth as default planet view upon page load
+    this.viewPlanet = this.dataPlanet[2];
+    this.planetColor = this.accentColor[2];
   },
 
   methods: {
@@ -130,7 +114,7 @@ export default {
     </nav>
   </header>
   <div class="component-container">
-    <PlanetDisplay v-if="loaded" :planet="viewPlanet" :pColor="planetColor" />
+    <PlanetDisplay  :planet="viewPlanet" :pColor="planetColor" />
   </div>
 </template>
 
