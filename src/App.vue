@@ -113,8 +113,9 @@ export default {
       </ul>
     </nav>
   </header>
+
   <div class="component-container">
-    <PlanetDisplay  :planet="viewPlanet" :pColor="planetColor" />
+    <PlanetDisplay :planet="viewPlanet" :pColor="planetColor" />
   </div>
 </template>
 
@@ -155,7 +156,7 @@ header {
       .hamburger-icon {
         width: 24px;
         height: auto;
-        transition: 200ms ease;
+        transition: 300ms ease;
       }
 
       .hamburger-icon-active {
@@ -173,6 +174,16 @@ header {
       top: 6rem; // set to min-height of <header>
       width: 100vw;
       z-index: 9001;
+      animation: sliding 300ms forwards;
+
+      @keyframes sliding {
+        from {
+          transform: translateX(-100%);
+        }
+        to {
+          transform: translateX(0%);
+        }
+      }
 
       .mobile-menu-item {
         @include header-4;
@@ -255,6 +266,7 @@ header {
     .accentBorderColor:hover {
       // using vue, hover color based on planet accent color
       border-color: v-bind(hoverColor);
+      transition: 300ms ease;
     }
 
     .menu-item {

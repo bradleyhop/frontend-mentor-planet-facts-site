@@ -106,7 +106,7 @@ export default {
       <div class="img-container">
         <div class="center-planets">
           <img class="planet-img" :src="imageUrl" />
-          <img v-if="num === 2" :src="geologyImgUrl" class="geology-image" />
+          <img v-if="num === 2" :src="geologyImgUrl" class="geology-img" />
         </div>
       </div>
 
@@ -225,6 +225,7 @@ export default {
     color: $white;
     border-bottom: 4px solid v-bind(pColor);
     padding-bottom: 0.86rem;
+    transition: 300ms ease;
   }
 }
 
@@ -270,7 +271,7 @@ export default {
         }
       }
 
-      .geology-image {
+      .geology-img {
         height: auto;
         max-width: 7rem; // making a guess here; nothing on design doc
         position: absolute;
@@ -411,6 +412,7 @@ export default {
       &:hover {
         background-color: rgba(216, 216, 216, 0.2);
         border: 1px solid rgba(216, 216, 216, 0); // to blend in with background
+        transition: 300ms ease;
       }
 
       @include tablet-breakpoint {
@@ -460,6 +462,7 @@ export default {
     .active-button {
       background-color: v-bind(pColor);
       border: 1px solid v-bind(pColor);
+      transition: 300ms ease;
 
       &:hover {
         background-color: v-bind(pColor);
