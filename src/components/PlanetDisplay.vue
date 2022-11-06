@@ -505,6 +505,11 @@ export default {
     font-size: 0.57rem;
     line-height: 1.14rem;
     letter-spacing: 0.72px;
+    padding-top: 5px; // cheater
+
+    @include tablet-breakpoint {
+      padding-top: 0;
+    }
 
     @include desktop-breakpoint {
       font-size: 0.79rem;
