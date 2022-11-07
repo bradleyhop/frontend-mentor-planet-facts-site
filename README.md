@@ -11,7 +11,6 @@ This is a solution to the [Planets fact site challenge on Frontend Mentor](https
 - [My process](#my-process)
   - [Built with](#built-with)
   - [What I learned](#what-i-learned)
-  - [Useful resources](#useful-resources)
 - [Author](#author)
 - [Acknowledgments](#acknowledgments)
 
@@ -76,17 +75,10 @@ I also lost some time trying to stylize the list icons in the mobile menu; I
 finally decided that having a semantic list with no icon styling but with CSS
 `<div>`s would get what I wanted to see much easier.
 
-### Useful resources
-
-- [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
-- [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
-
-**Note: Delete this note and replace the list above with resources that helped you during the challenge. These could come in handy for anyone viewing your solution or for yourself when you look back on this project in the future.**
-
 ## Author
 
 - Website - [Bradley Smith](https://bradleysmith.tech)
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/bradleyhop)
+- Frontend Mentor - [@bradleyhop](https://www.frontendmentor.io/profile/bradleyhop)
 
 ## Acknowledgments
 
