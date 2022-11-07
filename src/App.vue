@@ -117,6 +117,24 @@ export default {
   <main class="component-container">
     <PlanetDisplay :planet="viewPlanet" :pColor="planetColor" />
   </main>
+
+  <footer>
+    <div class="attribution">
+      Challenge by
+      <a
+        href="https://www.frontendmentor.io/challenges/planets-fact-site-gazqN8w_f"
+        target="_blank"
+        rel="noopener noreferrer"
+        >Frontend Mentor</a
+      >. Code by
+      <a
+        href="https://github.com/bradleyhop/frontend-mentor-planet-facts-site"
+        target="_blank"
+        rel="noopener noreferrer"
+        >Bradley Smith</a
+      >.
+    </div>
+  </footer>
 </template>
 
 <style lang="scss">
@@ -295,6 +313,25 @@ header {
       &:hover {
         opacity: 1;
       }
+    }
+  }
+}
+
+.attribution {
+  @include para-p;
+  font-size: 1.1rem;
+  margin: 2rem auto;
+  min-height: 4rem;
+  text-align: center;
+  width: clamp(50%, 65%, 100%);
+
+  & a {
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+
+    &:hover {
+      text-decoration: underline;
     }
   }
 }
