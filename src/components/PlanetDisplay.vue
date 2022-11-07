@@ -105,8 +105,21 @@ export default {
 
       <div class="img-container">
         <div class="center-planets">
-          <img class="planet-img" :src="imageUrl" />
-          <img v-if="num === 2" :src="geologyImgUrl" class="geology-img" />
+          <img
+            class="planet-img"
+            :src="imageUrl"
+            :alt="
+              this.num === 0
+                ? 'image of the planet overiew'
+                : 'image of the internal structure of the planet'
+            "
+          />
+          <img
+            v-if="num === 2"
+            :src="geologyImgUrl"
+            alt="planet geology image layer"
+            class="geology-img"
+          />
         </div>
       </div>
 
