@@ -114,9 +114,9 @@ export default {
     </nav>
   </header>
 
-  <div class="component-container">
+  <main class="component-container">
     <PlanetDisplay :planet="viewPlanet" :pColor="planetColor" />
-  </div>
+  </main>
 </template>
 
 <style lang="scss">

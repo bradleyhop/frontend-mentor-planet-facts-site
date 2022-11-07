@@ -30,7 +30,6 @@ Users should be able to:
 - Solution URL: [GitHub Repo](https://github.com/bradleyhop/frontend-mentor-planet-facts-site)
 - Live Site URL: [via GitHub Pages](https://bradleyhop.github.io/frontend-mentor-planet-facts-site/)
 
-
 ### Screenshot
 
 #### Desktop
