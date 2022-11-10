@@ -55,7 +55,7 @@ Users should be able to:
 
 ### What I learned
 
-####Views vs Components
+#### Views vs Components
 
 At first, I was going to build a page for each planet and use Vue Router to link
 the pages together. However, I quickly changed my strategy to abstraction and
@@ -63,7 +63,7 @@ instead use a component to display a planet's information. The main page pulls
 in a local json file, sets "Earth" as the default view, and then sends new
 planet information when the use selects from the menu.
 
-####Automate Lists
+#### Automate Lists
 
 I changed my strategy from hard-coding a list for the menu to a for loop. Since
 the style for the mobile is so different from the other views, I made a separate
@@ -71,7 +71,7 @@ loop. I utilized Vue's conditional rendering to show the appropriate menus based
 on device size; of course, media queries also aide in this showing and hiding
 blocks of HTML that this project requires.
 
-####CSS Level Up
+#### CSS Level Up
 
 With each FrontendMentor project, I find myself becoming more and more skilled
 in CSS. With this project, I added small animations on hover using `transition`
@@ -81,7 +81,7 @@ I also lost some time trying to stylize the list icons in the mobile menu; I
 finally decided that having a semantic list with no icon styling but with CSS
 `<div>`s would get what I wanted to see much easier.
 
-####Local Asset Linking
+#### Local Asset Linking
 
 I also had trouble linking in my local images using Vite. For the developer
 build, using a function to get the local asset worked:
@@ -106,7 +106,6 @@ imageUrl() {
     imgLink = this.planet.images[this.imgLayer[0]];
   } else {
     imgLink = this.planet.images[this.imgLayer[this.num]];
-  }
 
   return imgLink;
 }
