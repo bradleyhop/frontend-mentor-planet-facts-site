@@ -49,8 +49,8 @@ export default {
       return imgLink;
     },
 
+    // called and displayed only when the geology view is chosen
     geologyImgUrl() {
-      // called and displayed only when the geology view is chosen
       return this.planet.images[this.imgLayer[2]];
     },
 

@@ -70,7 +70,10 @@ export default {
       </button>
       <!-- mobile menu  -->
       <nav>
-        <ul v-if="toggleMenu" class="mobile-menu-list">
+        <ul
+          class="mobile-menu-list"
+          :class="toggleMenu ? 'animate-menu' : 'remove-menu'"
+        >
           <li
             v-for="item in dataPlanet"
             :key="item"
@@ -114,7 +117,10 @@ export default {
     </nav>
   </header>
 
-  <main class="component-container">
+  <main
+    class="component-container"
+    :class="toggleMenu ? 'hide-main' : 'restore-main'"
+  >
     <PlanetDisplay :planet="viewPlanet" :pColor="planetColor" />
   </main>
 
@@ -125,14 +131,18 @@ export default {
         href="https://www.frontendmentor.io/challenges/planets-fact-site-gazqN8w_f"
         target="_blank"
         rel="noopener noreferrer"
-        >Frontend Mentor</a
-      >. Code by
+      >
+        Frontend Mentor
+      </a>
+      <br />
+      Code by
       <a
         href="https://github.com/bradleyhop/frontend-mentor-planet-facts-site"
         target="_blank"
         rel="noopener noreferrer"
-        >Bradley Smith</a
-      >.
+      >
+        Bradley Smith
+      </a>
     </div>
   </footer>
 </template>
@@ -190,10 +200,13 @@ header {
       list-style-position: inside;
       position: absolute;
       top: 6rem; // set to min-height of <header>
-      width: 100vw;
+      // width: 100vw;
       z-index: 9001;
-      animation: sliding 300ms forwards;
+      // animation: sliding 300ms forwards;
+      overflow-x: hidden;
+      transition: 200ms;
 
+      /*
       @keyframes sliding {
         from {
           transform: translateX(-100%);
@@ -202,6 +215,7 @@ header {
           transform: translateX(0%);
         }
       }
+      */
 
       .mobile-menu-item {
         @include header-4;
@@ -241,7 +255,7 @@ header {
 
           .chevron-icon {
             align-self: center;
-            height: auto;
+            height: 8px;
             width: 4px;
           }
         }
@@ -320,10 +334,10 @@ header {
 .attribution {
   @include para-p;
   font-size: 1.1rem;
+  line-height: 160%;
   margin: 2rem auto;
   min-height: 4rem;
   text-align: center;
-  width: clamp(50%, 65%, 100%);
 
   & a {
     text-decoration: none;
@@ -334,5 +348,24 @@ header {
       text-decoration: underline;
     }
   }
+}
+
+// animate menu classes
+.animate-menu {
+  width: 100vw;
+  width: 100dvw;
+}
+
+.remove-menu {
+  width: 0vw;
+}
+
+// hide web content when mobile menu is displayed; invoked by menu component
+.hide-main {
+  display: none;
+}
+
+.restore-main {
+  display: block;
 }
 </style>
