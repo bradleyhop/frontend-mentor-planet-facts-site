@@ -148,11 +148,14 @@ export default {
 </template>
 
 <style lang="scss">
+$transition-default: 300ms ease;
+$header-height: 6rem;
+
 header {
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   display: flex;
   justify-content: space-between;
-  min-height: 6rem;
+  min-height: $header-height;
   width: 100%;
   padding: 0 1.71rem;
 
@@ -184,7 +187,7 @@ header {
       .hamburger-icon {
         width: 24px;
         height: auto;
-        transition: 300ms ease;
+        transition: $transition-default;
       }
 
       .hamburger-icon-active {
@@ -199,23 +202,10 @@ header {
       list-style: none;
       list-style-position: inside;
       position: absolute;
-      top: 6rem; // set to min-height of <header>
-      // width: 100vw;
+      top: $header-height; // set to min-height of <header>
       z-index: 9001;
-      // animation: sliding 300ms forwards;
       overflow-x: hidden;
-      transition: 200ms;
-
-      /*
-      @keyframes sliding {
-        from {
-          transform: translateX(-100%);
-        }
-        to {
-          transform: translateX(0%);
-        }
-      }
-      */
+      transition: $transition-default;
 
       .mobile-menu-item {
         @include header-4;
@@ -298,7 +288,7 @@ header {
     .accentBorderColor:hover {
       // using vue, hover color based on planet accent color
       border-color: v-bind(hoverColor);
-      transition: 300ms ease;
+      transition: $transition-default;
     }
 
     .menu-item {

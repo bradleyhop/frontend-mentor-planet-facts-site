@@ -63,7 +63,7 @@ Users should be able to:
 At first, I was going to build a page for each planet and use Vue Router to link
 the pages together. However, I quickly changed my strategy to abstraction and
 instead use a component to display a planet's information. The main page pulls
-in a local json file, sets "Earth" as the default view, and then sends new
+in a local JSON File, sets "Earth" as the default view, and then sends new
 planet information when the use selects from the menu.
 
 #### Automate Lists
@@ -104,7 +104,7 @@ point to this directory. Then my function changed to:
 imageUrl() {
   let imgLink;
 
-  // surface geology image is overlayed on the Overview image
+  // surface geology image is over-layed on the Overview image
   if (this.num === 2) {
     imgLink = this.planet.images[this.imgLayer[0]];
   } else {
@@ -126,9 +126,19 @@ From Vite's link local assets documentation:
 
 ### What I would do differently
 
-On returning to this project, I noticed that I put too much of the structure in one file, App.vue. I would rip out the heading and navigation into its own component, as well as the footer.
+On returning to this project, I noticed that I put too much of the structure in
+one file, App.vue. I would rip out the heading and navigation into its own
+component, as well as the footer.
 
-I updated the animation of the mobile menu as well as hiding the `<main>` content on the active menu.
+Another is that I chose to pass props to a component for the content of each
+planet. I think I would use VueRouter instead. Separating out the navigation
+would be easier this way. Although, each plant page view would probably cal l
+the same components anyway. Using VueRouter would make the website easier to
+expand in the future, however, for this SPA, I think that simply changing the
+props passed to the planet component works well enough.
+
+I updated the animation of the mobile menu as well as hiding the `<main>`
+content on the active mobile menu.
 
 ## Author
 
